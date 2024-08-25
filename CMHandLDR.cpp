@@ -3,6 +3,8 @@
 #define DHTPIN 4
 #define DHTTYPE DHT22
 
+#define LDRPIN 34
+
 DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
@@ -15,6 +17,7 @@ void loop() {
 
   float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
+  int ldrValue = analogRead(LDRPIN);
 
   if (isnan(temperature) || isnan(humidity)) {
     Serial.println(F("Failed to read from DHT sensor!"));
@@ -28,4 +31,7 @@ void loop() {
   Serial.print(F("Humidity: "));
   Serial.print(humidity);
   Serial.println(F(" %"));
+
+  Serial.print(F("LDR Value: "));
+  Serial.println(ldrValue);
 }
